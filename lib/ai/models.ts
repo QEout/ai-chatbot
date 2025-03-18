@@ -1,4 +1,4 @@
-import { openai } from '@ai-sdk/openai';
+import { createOpenAI } from '@ai-sdk/openai';
 import { fireworks } from '@ai-sdk/fireworks';
 import {
   customProvider,
@@ -7,6 +7,11 @@ import {
 } from 'ai';
 
 export const DEFAULT_CHAT_MODEL: string = 'chat-model-small';
+
+const openai = createOpenAI({
+  baseURL: process.env.OPENAI_BASE_URL,
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export const myProvider = customProvider({
   languageModels: {
@@ -20,7 +25,7 @@ export const myProvider = customProvider({
     'artifact-model': openai('gpt-4o-mini'),
   },
   imageModels: {
-    'small-model': openai.image('dall-e-2'),
+    'small-model': openai.image('dall-e-3'),
     'large-model': openai.image('dall-e-3'),
   },
 });
